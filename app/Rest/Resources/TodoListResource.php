@@ -3,6 +3,7 @@
 namespace App\Rest\Resources;
 
 use App\Rest\Resources\Resource;
+use Lomkit\Rest\Relations\HasMany;
 
 class TodoListResource extends Resource
 {
@@ -23,7 +24,8 @@ class TodoListResource extends Resource
     public function fields(\Lomkit\Rest\Http\Requests\RestRequest $request): array
     {
         return [
-            'id'
+            'id',
+            "title"
         ];
     }
 
@@ -34,7 +36,9 @@ class TodoListResource extends Resource
      */
     public function relations(\Lomkit\Rest\Http\Requests\RestRequest $request): array
     {
-        return [];
+        return [
+            HasMany::make('todos', TodoResource::class),
+        ];
     }
 
     /**
